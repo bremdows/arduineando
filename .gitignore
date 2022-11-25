@@ -1,0 +1,5 @@
+# Bloqueo de los archivos .zip (de manera general)
+*.zip
+
+# Bloque de la carpeta Arduino
+arduino-ide_2.0.2/
