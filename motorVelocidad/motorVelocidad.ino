@@ -15,7 +15,7 @@ void saludar(String texto ){
 }
 
 void controlLeds( int on){
-  for(int i = 8; i <= 11; i++){
+  for(int i = 8; i <= 10; i++){
     digitalWrite(i, LOW);
   }
   digitalWrite(on, HIGH);
