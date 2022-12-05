@@ -43,7 +43,6 @@ void setup() {
 
   // ACTIVANDO EL MOTOR
   pinMode(motor, OUTPUT);
-  saludar("Buena Noche Bremdow :v ");
 }
 
 void loop() {
