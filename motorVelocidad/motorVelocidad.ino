@@ -58,6 +58,7 @@ void loop() {
     Serial.println( digitalRead(pulsador2));  
 
     digitalWrite(ledInterruptor, HIGH);
+    // CAMBIO EN EL FUNCIONAMIENTO
     switch(velocidades) {
       case 1 : 
         analogWrite(motor, 170);
