@@ -71,7 +71,7 @@ void loop() {
         apagarLeds();
       break;
       case 1 :
-        analogWrite(motor, 125);
+        analogWrite(motor, 150);
         controlLeds(ledRojo);
       break;
       case 2 :
@@ -91,9 +91,7 @@ void loop() {
     analogWrite(motor, 0);
 
     digitalWrite(ledInterruptor, LOW);
-    digitalWrite(ledRojo, LOW);
-    digitalWrite(ledAmbar, LOW);
-    digitalWrite(ledVerde, LOW);
+    apagarLeds();
     interruptor = 0;
     velocidades = 0;
   }
