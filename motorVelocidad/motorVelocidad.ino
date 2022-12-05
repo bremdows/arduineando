@@ -21,6 +21,12 @@ void controlLeds( int on){
   digitalWrite(on, HIGH);
 }
 
+void apagarLeds(){
+  for(int i = 8; i <= 10; i++){
+    digitalWrite(i, LOW);
+  }
+}
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -60,18 +66,24 @@ void loop() {
     digitalWrite(ledInterruptor, HIGH);
     // CAMBIO EN EL FUNCIONAMIENTO
     switch(velocidades) {
-      case 1 : 
-        analogWrite(motor, 170);
-        controlLeds(ledAmbar);
+      case 0 : 
+        analogWrite(motor, 0);
+        apagarLeds();
       break;
-      case 2 :
-        analogWrite(motor, 255);
-        controlLeds(ledVerde);
-      break;
-      default :
+      case 1 :
         analogWrite(motor, 85);
         controlLeds(ledRojo);
-        velocidades = 0;
+      break;
+      case 2 :
+        analogWrite(motor, 170);
+        controlLeds(ledAmbar);        
+      break;
+      case 3 :
+        analogWrite(motor, 255);
+        controlLeds(ledVerde);        
+      break;
+      default :
+        velocidades = 1;
       break;
     }
   }
