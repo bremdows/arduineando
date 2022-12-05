@@ -71,7 +71,7 @@ void loop() {
         apagarLeds();
       break;
       case 1 :
-        analogWrite(motor, 85);
+        analogWrite(motor, 125);
         controlLeds(ledRojo);
       break;
       case 2 :
