@@ -59,17 +59,131 @@ byte const medioPaso[8] = {
 
 void puerto(int bits, int ini, int fin){
   for(int i = ini; i <= fin; i++){
-    digitalWrite(i, bitRead(bits, i-ini));
+    digitalWrite(i, bitRead(bits, i - ini));
   }
 }
 
 
 void setup() {
   // put your setup code here, to run once:
+  for(int i = 2; i <= 5; i++){
+    pinMode(i, INPUT);
+  }
 
+  for(int i = IN1; i <= IN4; i++){
+    pinMode(i, OUTPUT);
+  }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  //******************************************************************************//
+  //***********    Pregunta por los Pulsadores   *********************************//
+  //******************************************************************************//
+  
+  // Giro en Sentido Horario
+  if(digitalRead(pHorario))  // Pregunta si pulsador horario fue presionado
+  {
+    delay(100); //Anti-Rebote
+    horario=1;
+    Cpaso=-1;
+  }
+  // Giro en Sentido Anti-Horario
+  if(digitalRead(pAntiHorario))  // Pregunta si pulsador horario fue presionado
+  {
+    delay(100); //Anti-Rebote
+    horario=0;
+    Cpaso=paso;
+  }
+  // Cambio de la secuencia de pasos
+  if(digitalRead(PPasos))  // Pregunta si pulsador horario fue presionado
+  {
+    delay(100); //Anti-Rebote
+    while(digitalRead(PPasos)); //Espera hasta soltar el boton
+    delay(100); //Anti-Rebote
+    conf++;
+    //Si ya paso por las 3 configuraciones reinicie
+    if(conf>3)
+      conf=1;
+    if(horario==1)
+      Cpaso=-1;
+    else
+      Cpaso=paso;
+    puerto(B0000,IN1,IN4);
+  }
+  // Velocidad del Motor
+  if(digitalRead(PVel))  // Pregunta si pulsador horario fue presionado
+  {
+    delay(100); //Anti-Rebote
+    while(digitalRead(PVel)); //Espera hasta soltar el boton
+    delay(100); //Anti-Rebote
+    Cvel++;
+    //Si ya paso por las 5 velocidades reinicie
+    if(Cvel>4)
+      Cvel=0;
+  }
+  //******************************************************************************//
+  //***********    Logica de los contadores      *********************************//
+  //******************************************************************************//
+  if(horario == 1)
+  {
+    Cpaso++;                        //Incremente la variable cont
+    if(Cpaso >= paso)
+       Cpaso=0;                          //Se pone Contador de pasos en cero 
+  } 
+  else{
+    Cpaso--;                        //Decremente la variable cont
+    if(Cpaso<0)
+      Cpaso=paso-1;                  //Se pone Contador igual al paso
+  }
+  
+  //******************************************************************************//
+  //***********    Secuencia de Movimiento del Motor   ***************************//
+  //******************************************************************************//
+    switch(conf){
+      case 1:
+              puerto(UnPaso[Cpaso],IN1,IN4); //Envíe al puerto la información de la tabla
+              paso=4;
+              break;
+      case 2:
+              puerto(DosPasos[Cpaso],IN1,IN4); //Envíe al puerto la información de la tabla
+              paso=4;
+              break;
+      case 3:
+              puerto(MedioPaso[Cpaso],IN1,IN4); //Envíe al puerto la información de la tabla
+              paso=8;
+              break;
+    }
+    delay(vel[Cvel]);                      //Retardo de 100 milisegundos  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
