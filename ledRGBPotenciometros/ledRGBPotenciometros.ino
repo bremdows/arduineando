@@ -1,7 +1,8 @@
+template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg); return obj; }
 // POTENCIOMETRO
 int pot1 = A0;
 int pot2 = A1;
-int pot3 = A3;
+int pot3 = A2;
 
 int potValue1 = 0;
 int potValue2 = 0;
@@ -18,6 +19,10 @@ int light3 = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
 }
 
 void loop() {
@@ -34,5 +39,14 @@ void loop() {
   analogWrite(led1, light1);
   analogWrite(led2, light2);
   analogWrite(led3, light3);
+
+  Serial << "Pot 1: " << potValue1 << "\n";
+  Serial << "Luminosidad 1: " << light1 << "\n";
+
+  Serial << "Pot 2: " << potValue2 << "\n";
+  Serial << "Luminosidad 2: " << light2 << "\n";
+  
+  Serial << "Pot 3: " << potValue3 << "\n";
+  Serial << "Luminosidad 3: " << light3 << "\n";
   
 }
