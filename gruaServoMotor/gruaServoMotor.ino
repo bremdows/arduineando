@@ -30,23 +30,23 @@ void setup() {
 void loop() {
   
   // CONTROL DEL EJE X - ROTACIÓN HORIZONTAL
-  if( analogRead(pinEjeX) < 200 && ejeX < 180) ){
+  if( analogRead(pinEjeX) < 200 && ejeX < 180) {
     ejeX++;
     servoRotacion.write(ejeX);
   }
 
-  if( analogRead(pinEjeX) > 700 && ejeX > 0) ){
+  if( analogRead(pinEjeX) > 700 && ejeX > 0) {
     ejeX--;
     servoRotacion.write(ejeX);
   }
 
   // CONTROL DEL EJE Y - ROTACIÓN VERTICAL
-  if( analogRead(pinEjeY) < 200 && ejeY < 180) ){
+  if( analogRead(pinEjeY) < 200 && ejeY < 180) {
     ejeY++;
     servoGrua.write(ejeY);
   }
 
-  if( analogRead(pinEjeY) > 700 && ejeY > 0) ){
+  if( analogRead(pinEjeY) > 700 && ejeY > 0) {
     ejeY--;
     servoGrua.write(ejeY);
   }
