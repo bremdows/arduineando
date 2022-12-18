@@ -12,21 +12,27 @@ int ejeX = 90;
 int ejeY = 90;
 
 // CONTROL DEL ELEVADOR DE LA GRUA
-int pinGruaBoton = 7;
+int pinDireccionGrua = 7;
+int pinEncendidoGrua = 6;
 int interruptor = 0;
+int direccionGrua = 0;
+
+// INDICADORES VISUALES
+int led = 10;
 
 // VARIABLES DE LA LIBRERIA SERVO
-
 Servo servoRotacion;
 Servo servoGrua;
 
 
 void setup() {
   // INICIANDO EL MONITOR SERIAL
-  Serial.begin(9600);
+  // Serial.begin(9600);
 
   // ENTRADAS Y SALIDAS
-  pinMode(pinGruaBoton, INPUT_PULLUP);
+  pinMode(pinDireccionGrua, INPUT_PULLUP);
+  pinMode(pinEncendidoGrua, INPUT);
+  pinMode(led, OUTPUT);
   
   //  INDICANDO EL PIN DE CONEXIÓN DE LOS SERVOS
   servoRotacion.attach(pinServoRotacion);
@@ -38,23 +44,42 @@ void setup() {
 }
 
 void loop() {
-  
-  Serial.println( digitalRead(pinGruaBoton));
 
-  if( digitalRead(pinGruaBoton) == 0){
+  if( digitalRead(pinEncendidoGrua) == 1){
     interruptor++;
-    delay(100);
+    delay(500);
   }
   if(interruptor == 1){
     // ENCENDER MOTOR PASO A PASO
-    Serial.println("Encendido");
+    digitalWrite(led, HIGH);
+    // Serial.println("ENCENDIDO");
+
+    if ( digitalRead(pinDireccionGrua) == 0 ){
+      direccionGrua++;
+      delay(100);
+    }
+    switch(direccionGrua){
+      case 1:
+        // Serial.println("GIRO HORARIO");
+      break;
+
+      case 2:
+        // Serial.println("GIRO ANTI-HORARIO");
+      break;
+      
+      case 3:
+        direccionGrua = 1;
+      break;
+    }
   }
   if(interruptor == 2){
     // APAGAR MOTOR PASO A PASO
-    Serial.println("APAGADO");
+    digitalWrite(led, LOW);
+    // Serial.println("APAGADO");
     interruptor = 0;
   }
- /*  // CONTROL DEL EJE X - ROTACIÓN HORIZONTAL
+  
+  // CONTROL DEL EJE X - ROTACIÓN HORIZONTAL
   if( analogRead(pinEjeX) < 200 && ejeX < 180) {
     ejeX++;
     servoRotacion.write(ejeX);
@@ -76,6 +101,5 @@ void loop() {
     servoGrua.write(ejeY);
   }
 
-  delay(15); */
+  delay(15); 
 }
-
