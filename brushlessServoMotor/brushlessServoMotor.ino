@@ -35,12 +35,14 @@ void setup() {
 
 	// SALIDAS
 	pinMode(pinServoVentilador, OUTPUT); // SERVO
-	pinMode(ventilador, OUPUT); // VENTILADOR
+	pinMode(ventilador, OUTPUT); // VENTILADOR
 
 	// CONFIGURANDO EL PUERTO ARDUINO AL VENTILADOR
-	servoVentilador.attach(ventilador);
+	servoVentilador.attach(pinServoVentilador);
 	// INICIANDO EL VENTILADOR EN LA POSICIÓN PREDETERMINADA
 	servoVentilador.write( posicionVentilador);
+
+	analogWrite(ventilador, 0);
 
 }
 
@@ -67,7 +69,7 @@ void loop() {
 	// VENTILADOR ENCENDIDO
 	if (interruptor == 1){
 		// CONTROL DE VELOCIDAD	
-		velocidadVentilador = map(potenVelocidadVentilador, 0, 1023, 0, 255);
+		velocidadVentilador = map( analogRead(potenVelocidadVentilador), 0, 1023, 0, 255);
 		analogWrite(ventilador, velocidadVentilador);
 
 		switch(giroVentilador){
