@@ -13,7 +13,8 @@ int pulsadorGiro = 3;
 int potenVelocidadVentilador = A0;
 
 // PIN PARA EL VENTILADOR
-int ventilador = 9;  
+int pinServoVentilador = 4;  
+int ventilador = 9;
 
 
 // VARIABLES DE CONTROL
@@ -31,10 +32,10 @@ void setup() {
 	// ENTRADAS
 	pinMode(pulsadorInterruptor, INPUT); 
 	pinMode(pulsadorGiro, INPUT);
-	pinMode(potenVelocidadVentilador, INPUT);
 
 	// SALIDAS
-	pinMode(ventilador, OUTPUT);
+	pinMode(pinServoVentilador, OUTPUT); // SERVO
+	pinMode(ventilador, OUPUT); // VENTILADOR
 
 	// CONFIGURANDO EL PUERTO ARDUINO AL VENTILADOR
 	servoVentilador.attach(ventilador);
