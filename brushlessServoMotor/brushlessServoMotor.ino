@@ -1,19 +1,29 @@
+/* 
+  FUNCIONALIDADES
+  - Control de velocidad (potenciometro)
+  - Encendido y apagado (pulsador)
+  - Movimiento 0 - 180 y estatico (pulsador)
+*/
+
 #include <Servo.h> // librería para controlar servomotores
 
-Servo servo; // declaración de un objeto servo
+// Pulsadores
+int pinPulsador= 7; 
+int 
+// Pin del ventilador
+int ventilador = 9; 
 
-int pinPulsador= 7; // pines del botón
-int servoMotor = 11; // pin para el servoMotor
 
 // CONTROL DEL VENTILADOR 
 int girar = 0;
 int posicionVentilador = 0;
-int ventilador = 12;
 
+
+Servo servo; // declaración de un objeto servo
 void setup() {
-  servo.attach(servoMotor); // conectamos el servo al pin 9
+  servo.attach(ventilador); // conectamos el servo al pin 9
   pinMode(pinPulsador, INPUT); // configuramos el pin del botón como entrada
-  pinMode(ventilador,OUTPUT);
+  pinMode(ventilador, OUTPUT);
 }
 
 void loop() {
