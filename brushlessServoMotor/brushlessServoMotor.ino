@@ -13,7 +13,7 @@ int pulsadorGiro = 3;
 int potenVelocidadVentilador = A0;
 
 // PIN PARA EL VENTILADOR
-int pinServoVentilador = 4;  
+int pinServoVentilador = 5;  
 int ventilador = 9;
 
 
@@ -28,7 +28,7 @@ int retrasoServo = 15;
 // VARIABLE - OBJETO SERVO PARA EL VENTILADOR
 Servo servoVentilador; 
 void setup() {
-	
+	Serial.begin(9600);
 	// ENTRADAS
 	pinMode(pulsadorInterruptor, INPUT); 
 	pinMode(pulsadorGiro, INPUT);
@@ -71,6 +71,8 @@ void loop() {
 		// CONTROL DE VELOCIDAD	
 		velocidadVentilador = map( analogRead(potenVelocidadVentilador), 0, 1023, 0, 255);
 		analogWrite(ventilador, velocidadVentilador);
+		Serial.println("ON");
+		Serial.println(velocidadVentilador);
 
 		switch(giroVentilador){
 			case 0:
@@ -98,6 +100,7 @@ void loop() {
 	}
 	// VENTILADOR APAGADO
 	if( interruptor == 2){
+		Serial.println("OFF");
 		analogWrite(ventilador, 0);
 		interruptor = 0;
 	}
