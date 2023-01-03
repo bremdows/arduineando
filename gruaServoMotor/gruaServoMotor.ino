@@ -1,5 +1,9 @@
 // AGREGANDO LA LIBRERÍA SERVOMOTOR
 #include <Servo.h>
+
+// AGREGANDO LA LIBRERIA PARA EL MOTOR PAP
+#include <Stepper.h>
+
 // VARIABLES DE CONTROL Y PINES 
 
 int pinServoRotacion = 8;
@@ -24,10 +28,13 @@ int led = 10;
 Servo servoRotacion;
 Servo servoGrua;
 
+// VARIABLES PARA CONTROLAR EL MOTOR PASO A PASO
+int pasosRevolucion = 2048;
+int velocidadMotor = 10;
+Stepper motorPAP(pasosRevolucion, 2, 3, 4, 5);
+
 
 void setup() {
-  // INICIANDO EL MONITOR SERIAL
-  // Serial.begin(9600);
 
   // ENTRADAS Y SALIDAS
   pinMode(pinDireccionGrua, INPUT_PULLUP);
@@ -41,6 +48,9 @@ void setup() {
   // DEFINIENDO LA POSICIÓN DE LOS SERVOMOTORES
   servoRotacion.write(90);
   servoGrua.write(90);
+
+  // DEFINIENDO LA VELOCIDAD DEL MOTOR PASO A PASO
+  motorPAP.setSpeed(velocidadMotor);
 }
 
 void loop() {
@@ -49,38 +59,42 @@ void loop() {
     interruptor++;
     delay(500);
   }
+  
   if(interruptor == 1){
     // ENCENDER MOTOR PASO A PASO
     digitalWrite(led, HIGH);
-    // Serial.println("ENCENDIDO");
 
     if ( digitalRead(pinDireccionGrua) == 0 ){
       direccionGrua++;
       delay(100);
     }
     switch(direccionGrua){
+      case 0:
+        pasosRevolucion = 0;
       case 1:
-        // Serial.println("GIRO HORARIO");
+        pasosRevolucion = 2048;
       break;
 
       case 2:
-        // Serial.println("GIRO ANTI-HORARIO");
+        pasosRevolucion = -2048;
       break;
       
       case 3:
-        direccionGrua = 1;
+        direccionGrua = 0;
       break;
     }
+    motorPAP.step(pasosRevolucion);
   }
   if(interruptor == 2){
     // APAGAR MOTOR PASO A PASO
     digitalWrite(led, LOW);
-    // Serial.println("APAGADO");
+    motorPAP.step(0);
     interruptor = 0;
+    pasosRevolucion = 0;
   }
   
   // CONTROL DEL EJE X - ROTACIÓN HORIZONTAL
-  if( analogRead(pinEjeX) < 200 && ejeX < 180) {
+  /* if( analogRead(pinEjeX) < 200 && ejeX < 180) {
     ejeX++;
     servoRotacion.write(ejeX);
   }
@@ -99,7 +113,7 @@ void loop() {
   if( analogRead(pinEjeY) > 700 && ejeY > 0) {
     ejeY--;
     servoGrua.write(ejeY);
-  }
+  } */
 
   delay(15); 
 }
