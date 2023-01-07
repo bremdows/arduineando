@@ -6,8 +6,11 @@
   TODO: MOV. DE LA CABEZA
 */
 
-// * Agregando librerias Servo
+/*  Agregando librerias Servo */
 #include <Servo.h>
+
+/*  */
+#include <
 
 // * VARIABLES DE CONTROL
 int status = 0;
@@ -15,7 +18,6 @@ int status = 0;
 // * VARIABLES DEL MOTOR
 int pinMotor1A = 2;
 int pinMotor1B = 3;
-
 int pinMotor2A = 4;
 int pinMotor2B = 5;
 
