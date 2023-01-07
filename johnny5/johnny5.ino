@@ -9,8 +9,6 @@
 /*  Agregando librerias Servo */
 #include <Servo.h>
 
-/*  */
-#include <
 
 // * VARIABLES DE CONTROL
 int status = 0;
@@ -38,7 +36,7 @@ Servo servoBrazoIzquierdo;
 void setup() {
 
   // * INICIANDO EL MONITOR SERIAL
-  Serial.begin(9600);
+  Serial.begin(38400);
 
   
   
