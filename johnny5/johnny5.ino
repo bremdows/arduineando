@@ -11,7 +11,7 @@
 
 
 // * VARIABLES DE CONTROL
-int status = 0;
+char status = 0;
 
 // * VARIABLES DEL MOTOR
 int pinMotor1A = 2;
@@ -35,10 +35,8 @@ Servo servoBrazoIzquierdo;
 
 void setup() {
 
-  // * INICIANDO EL MONITOR SERIAL
+  // * INICIANDO EL MONITOR SERIAL COMO RECEPTOR DEL MÓDULO BLUETOOTH
   Serial.begin(38400);
-
-  
   
   // * ESTABLECIENDO PIN DE CONTROL PARA EL SERVOMOTOR
   servoTorzo.attach(pinServoTorzo);
@@ -54,39 +52,51 @@ void loop() {
     * LEYENDO VALORES DESDE EL MONITOR SERIAL MEDIANTE EL MÓDULO BLUETOOTH
   */
 
-  if( Serial.available() > 0){
+  if( Serial.available()){
     status = Serial.read();
   } 
 
   switch(status){
     case 'W' :
       // * AVANZAR
-      status = 0;
     break;
     
     case 'S' :
       // * RETROCEDER
-      status = 0;
     break;
 
     case 'A' :
       // * IZQUIERDA
-      status = 0;
     break;
 
     case 'D' :
       // * DERECHA
-      status = 0;
     break;
 
     case 'Q' :
-      // * MOVER BRAZO DERECHO
-      status = 0;
+      // * MOVER BRAZO IZQUIERDO (ARRIBA - ABAJO)
+
     break;
 
     case 'E' :
-      // * MOVER BRAZO IZQUIERDO
-      status = 0;
+      // * MOVER BRAZO DERECHO (ARRIBA - ABAJO)
+    break;
+
+    case 'R':
+      // CABEZA A LA IZQUIERDA
+    break;
+
+    case 'T':
+      // CABEZA A LA DERECHA
+    
+    break;
+    
+    case 'Z':
+      // DORSO A LA IZQUIERDA
+    break;
+    
+    case 'X':
+      // DORSO A LA DERECHA
     break;
   }
 
