@@ -101,7 +101,7 @@ void loop() {
 
         case 'Q' :
           // * MOVER BRAZO IZQUIERDO (ARRIBA - ABAJO)
-          /* if(posicionBrazoI == 180){
+          if(posicionBrazoI == 180){
             estadoBI = 1;
           }
           if(posicionBrazoI == 0){
@@ -112,27 +112,27 @@ void loop() {
           }
           if(estadoBI == 1){
             posicionBrazoI -= cambioMovimiento;
-          } */
-          posicionBrazoI += cambioMovimiento;
+          }
+          // posicionBrazoI += cambioMovimiento;
           servoBrazoIzquierdo.write(posicionBrazoI);
         break;
 
         case 'E' :
           // * MOVER BRAZO DERECHO (ARRIBA - ABAJO)
-          /* if(posicionBrazoD == 180){
+          if(posicionBrazoD == 180){
             estadoBD = 1;
           }
-          if(posicionBrazoI == 0){
+          if(posicionBrazoD == 0){
             estadoBD = 0;
           }
           if(estadoBD == 0){
             posicionBrazoD += cambioMovimiento;
           }
-          if(estadoBI == 1){
+          if(estadoBD == 1){
             posicionBrazoD -= cambioMovimiento;
-          } */
-          posicionBrazoI -= cambioMovimiento;
-          servoBrazoIzquierdo.write(posicionBrazoI);
+          }
+          // posicionBrazoI -= cambioMovimiento;
+          servoBrazoDerecho.write(posicionBrazoD);
         break;
 
         case 'R':
