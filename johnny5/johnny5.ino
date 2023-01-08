@@ -137,21 +137,59 @@ void loop() {
 
         case 'R':
           // * CABEZA A LA IZQUIERDA
+          if( validarMovServo(posicionCabeza) ){
+            posicionCabeza -= cambioMovimiento;
+            servoCabeza.write(posicionCabeza);
+          }else{
+            posicionCabeza = reiniciarValor(posicionCabeza);
+          }
         break;
 
         case 'T':
           // * CABEZA A LA DERECHA
-        
+          if( validarMovServo(posicionCabeza) ){
+            posicionCabeza += cambioMovimiento;
+            servoCabeza.write(posicionCabeza);
+          }else{
+            posicionCabeza = reiniciarValor(posicionCabeza);
+          }
         break;
         
         case 'Z':
           // * DORSO A LA IZQUIERDA
+          if( validarMovServo(posicionTorzo) ){
+            posicionTorzo -= cambioMovimiento;
+            servoTorzo.write(posicionTorzo);
+          }else{
+            posicionTorzo = reiniciarValor(posicionTorzo);
+          }
         break;
         
         case 'X':
           // * DORSO A LA DERECHA
+          if( validarMovServo(posicionTorzo) ){
+            posicionTorzo += cambioMovimiento;
+            servoTorzo.write(posicionTorzo);
+          }else{
+            posicionTorzo = reiniciarValor(posicionTorzo);
+          }
         break;
       }    
   } 
 
+}
+
+boolean validarMovServo(int posicionServo){
+  if( posicionServo >= 0 && posicionServo <= 180)
+    return true;
+  else                
+    return false;
+}
+
+int reiniciarValor( int posicionServo ){
+  if( posicionServo > 180){
+    return 180;
+  }else if( posicionServo < 0){
+    return 0;
+  }
 }
