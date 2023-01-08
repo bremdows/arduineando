@@ -85,18 +85,39 @@ void loop() {
     switch(status){
         case 'W' :
           // * AVANZAR
+          digitalWrite(pinMotor1A, HIGH);
+          digitalWrite(pinMotor1B, LOW);
+
+          digitalWrite(pinMotor2A, HIGH);
+          digitalWrite(pinMotor2B, LOW);          
         break;
         
         case 'S' :
           // * RETROCEDER
+          digitalWrite(pinMotor1A, LOW);
+          digitalWrite(pinMotor1B, HIGH);
+
+          digitalWrite(pinMotor2A, LOW);
+          digitalWrite(pinMotor2B, HIGH);
         break;
 
         case 'A' :
           // * IZQUIERDA
+          digitalWrite(pinMotor1A, LOW);
+          digitalWrite(pinMotor1B, LOW);
+
+          digitalWrite(pinMotor2A, HIGH);
+          digitalWrite(pinMotor2B, LOW);
         break;
 
         case 'D' :
           // * DERECHA
+
+          digitalWrite(pinMotor1A, HIGH);
+          digitalWrite(pinMotor1B, LOW);
+
+          digitalWrite(pinMotor2A, LOW);
+          digitalWrite(pinMotor2B, LOW);
         break;
 
         case 'Q' :
@@ -175,6 +196,9 @@ void loop() {
           }
         break;
       }    
+      // * POR DEFECTO APAGAR LOS MOTORES DE MOV. (REDUCTORES) SI NO SE ESTA PRESIONANDO UNA TECLA
+      delay(110);
+      apagarMotoresReductores();
   } 
 
 }
@@ -193,3 +217,20 @@ int reiniciarValor( int posicionServo ){
     return 0;
   }
 }
+
+void apagarMotoresReductores(){
+  digitalWrite(pinMotor1A, LOW);
+  digitalWrite(pinMotor1B, LOW);
+
+  digitalWrite(pinMotor2A, LOW);
+  digitalWrite(pinMotor2B, LOW);
+}
+
+
+
+
+
+
+
+
+
