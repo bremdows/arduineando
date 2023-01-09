@@ -35,6 +35,7 @@ int posicionCabeza = 90;
 */
 int pinMotor1A = 2;
 int pinMotor1B = 3;
+
 int pinMotor2A = 4;
 int pinMotor2B = 5;
 
@@ -88,8 +89,8 @@ void loop() {
           digitalWrite(pinMotor1A, HIGH);
           digitalWrite(pinMotor1B, LOW);
 
-          digitalWrite(pinMotor2A, HIGH);
-          digitalWrite(pinMotor2B, LOW);          
+          digitalWrite(pinMotor2A, LOW);
+          digitalWrite(pinMotor2B, HIGH);          
         break;
         
         case 'S' :
@@ -97,8 +98,8 @@ void loop() {
           digitalWrite(pinMotor1A, LOW);
           digitalWrite(pinMotor1B, HIGH);
 
-          digitalWrite(pinMotor2A, LOW);
-          digitalWrite(pinMotor2B, HIGH);
+          digitalWrite(pinMotor2A, HIGH);
+          digitalWrite(pinMotor2B, LOW);
         break;
 
         case 'A' :
@@ -106,8 +107,8 @@ void loop() {
           digitalWrite(pinMotor1A, LOW);
           digitalWrite(pinMotor1B, LOW);
 
-          digitalWrite(pinMotor2A, HIGH);
-          digitalWrite(pinMotor2B, LOW);
+          digitalWrite(pinMotor2A, LOW);
+          digitalWrite(pinMotor2B, HIGH);
         break;
 
         case 'D' :
