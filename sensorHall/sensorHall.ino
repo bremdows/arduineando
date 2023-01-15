@@ -1,11 +1,15 @@
+// PIN ANALOGICO PARA EL SENSOR HALL
+int sensorHall = A0;
+
 
 
 void setup() {
-  // put your setup code here, to run once:
-
+  // INICIANDO EL MONITOR SERIAL
+  Serial.begin(38400);
+  Serial.println("SENSOR LISTO");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  Serial.println(analogRead(sensorHall));
 }
