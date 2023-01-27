@@ -12,9 +12,11 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
   flujoMagneticoLeido = analogRead(pinAnalogOut);
-  flujoMagneticoMedido = 3.7*flujoMagneticoLeido - 1937;
+  Serial.println(flujoMagneticoLeido);
+  //flujoMagneticoMedido = 3.7*flujoMagneticoLeido - 2553;
+  
   Serial.print("Campo Magnético:" );
   Serial.print(flujoMagneticoMedido);
   Serial.print(" G \n");
