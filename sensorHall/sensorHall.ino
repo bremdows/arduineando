@@ -1,4 +1,6 @@
-#include <LiquidCrystal.h>    // importa libreria
+// LIBRERIAS A UTILIZAR
+
+#include <LiquidCrystal.h>
 // VARIABLES DE ENTRADA
 int pinAnalogOut = A0;
 int flujoMagneticoLeido = 0;
@@ -28,11 +30,11 @@ int calibrarInstrumento( ){
     delay(250);
   }
   valorCalibrado /= 10;
+  digitalWrite(ledCalibracion, LOW);
   return valorCalibrado;
 }
 
 void setup() {
-  // lcd.begin(16, 2);     // inicializa a display de 16 columnas y 2 lineas
   // Iniciando el Monitor Serial
   Serial.begin(9600);
 
@@ -53,8 +55,6 @@ void loop() {
     calibrarInstrumento();
     delay(200);
   }
-
-
   /* FIN DE LA CALIBRACIÓN */
 
   lcd.setCursor(0, 0);      // ubica cursor en columna 0, linea 0
@@ -66,7 +66,4 @@ void loop() {
   lcd.print(flujoMagneticoMedido);   // escribe valor en segundos devuelto por funcion millis()
   lcd.print(" Gauss.");  // imprime a continuacion segundos
   delay(1000);
-
 }
-
-
