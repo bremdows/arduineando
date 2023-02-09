@@ -4,6 +4,7 @@ int pinAnalogOut = A0;
 int flujoMagneticoLeido = 0;
 int flujoMagneticoMedido = 0;
 int pinPulsadorCalibrador = 8;
+int ledCalibracion = 9;
 
 // INICIALIZANDO EL LCD
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);  // pines RS, E, D4, D5, D6, D7 de modulo 1602A
@@ -12,15 +13,19 @@ LiquidCrystal lcd(7, 6, 5, 4, 3, 2);  // pines RS, E, D4, D5, D6, D7 de modulo 1
 int valorCalibrado = 0;
 
 int calibrarInstrumento( ){
+  valorCalibrado = 0;
   for(int i = 0; i < 10; i++){
     lcd.setCursor(0, 0);
     lcd.print("Calibrando el");
     lcd.setCursor(0, 1);
     lcd.print("dispositivo ...");
-    
 
     valorCalibrado += analogRead(pinAnalogOut);
-    delay(500);
+    // PARPADEO DEL LED
+    digitalWrite(ledCalibracion, HIGH);
+    delay(250);
+    digitalWrite(ledCalibracion, LOW);
+    delay(250);
   }
   valorCalibrado /= 10;
   return valorCalibrado;
@@ -31,8 +36,9 @@ void setup() {
   // Iniciando el Monitor Serial
   Serial.begin(9600);
 
-  // INICIALIZANDO EL PULSADOR
+  // DEFINIENDO ENTRADAS Y SALIDAS
   pinMode(pinPulsadorCalibrador, INPUT);
+  pinMode(ledCalibracion, OUTPUT);
   
 }
 
